@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.events;
+using UnityEngine.Events;
 
 namespace FOGPIUtilities.StateMachine
 {
