@@ -4,21 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 //Cant add player controller to game object unless a rigid body exist
-//[RequireComponet(typeof(Rigidbody2D))]
+//[RequireComponent(typeof(Rigidbody2D))]
 
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     Vector2 moveInput;
-    //Vector2 IsMoving;
 
-    public bool isMoving { get; private set; }
+    public bool IsMoving { get; private set; }
 
     Rigidbody2D rb;
 
     public void Awake()
     {
-        rb = GetComponet<RigidBody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Start is called before the first frame update
@@ -38,7 +37,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(moveInput.x * walkSpeed, rb.velocity.y);
     }
 
-    void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
 
