@@ -13,12 +13,12 @@ public class ParallaxEffect : MonoBehaviour
     // Start 2 values of the parallax game object
     float startingZ;
 
-    Vector2 camMoveSinceStart => (Vector2) cam.transform.position - startingPosition;
+    Vector2 camMoveSinceStart => (Vector2)cam.transform.position - startingPosition;
 
     float zDistanceFromTarget => transform.position.z - followTarget.transform.position.z;
 
-    //can? fix it
-    float clippingPlane => (can.transform.position.z + (zDistanceFromSubject > 0 ? can.farClipLane : can.nearClipLane));
+
+    float clippingPlane => (cam.transform.position.z + (zDistanceFromTarget > 0 ? cam.farClipPlane : cam.nearClipPlane));
 
     float parallaxFactor => Mathf.Abs(zDistanceFromTarget) / clippingPlane;
 

@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cf9ac63546e6a45a4f1b367f292878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
+  followTarget: {fileID: 0}
 --- !u!114 &493939562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 684024089329828182, guid: 8500c559d6bac3b4bae7471c74fe0007, type: 3}
