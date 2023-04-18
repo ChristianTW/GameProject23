@@ -8,16 +8,40 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 5f;
+    public float walkSpeed = 8f;
     Vector2 moveInput;
 
-    public bool IsMoving { get; private set; }
+    private bool _isMoving = false;
+
+    public bool isMoving { get 
+        {
+            return _isMoving;
+        }
+        private set 
+        {
+                _isMoving = value;
+                animator.SetBool("isMoving", value);
+        }
+    }
+
+    public bool _isFacingRight = true;
+
+    public bool IsFacingRight {get { return _isFacingRight; } private set{
+        if(_isFacingRight != value)
+        {
+            // flip local scale
+            transform.localScale *= new Vector2(-1,1);
+        }
+        _isFacingRight = value;
+    } }
 
     Rigidbody2D rb;
+    Animator animator;
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -41,6 +65,23 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
 
-        IsMoving = moveInput != Vector2.zero;
+        isMoving = moveInput != Vector2.zero;
+
+        SetFacingDirection(moveInput);
     }
+
+    private void SetFacingDirection(Vector2 moveInput)
+    {
+        if(moveInput.x > 0 && !IsFacingRight)
+        {
+            // Face right
+            IsFacingRight = true;
+        }
+        else if (moveInput.x < 0 && IsFacingRight)
+        {
+            // Face left
+            IsFacingRight = false;
+        }
+    }
+
 }
