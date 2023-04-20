@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 8f;
+    public float walkSpeed = 10f;
     Vector2 moveInput;
 
     private bool _isMoving = false;
