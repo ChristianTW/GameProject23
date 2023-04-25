@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420031}
-  followTarget: {fileID: 0}
+  followTarget: {fileID: 1295951350}
 --- !u!1 &164124174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,10 +1647,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6684368503913077859, guid: 8500c559d6bac3b4bae7471c74fe0007, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684368503913077859, guid: 8500c559d6bac3b4bae7471c74fe0007, type: 3}
       propertyPath: m_GravityScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8088861696118390544, guid: 8500c559d6bac3b4bae7471c74fe0007, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8500c559d6bac3b4bae7471c74fe0007, type: 3}
 --- !u!1 &751648405
 GameObject:

@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 //Cant add player controller to game object unless a rigid body exist
-//[RequireComponent(typeof(Rigidbody2D))]
+//[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 10f;
+    public float jumpImpulse = 10f;
     Vector2 moveInput;
+    TouchingDirections touchingDirections;
 
     private bool _isMoving = false;
 
@@ -38,36 +40,29 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
 
-    public void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        touchingDirections = GetComponent<TouchingDirections>();
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput.x * walkSpeed, rb.velocity.y);
+
+        animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        
         moveInput = context.ReadValue<Vector2>();
-
+        
         isMoving = moveInput != Vector2.zero;
 
         SetFacingDirection(moveInput);
+
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -84,4 +79,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        // TODO check if alive as well
+        if(context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimationStrings.jump);
+            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+        }
+    }
 }
