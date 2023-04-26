@@ -13,6 +13,17 @@ public class PlayerController : MonoBehaviour
     Vector2 moveInput;
     TouchingDirections touchingDirections;
 
+    public float CurrentMoveSpeed { get
+        {
+            if(isMoving && !touchingDirections.IsOnWall)
+            {
+                return walkSpeed;
+            } else {
+                return 0;
+            }
+        }
+    }
+
     private bool _isMoving = false;
 
     public bool isMoving { get 
@@ -49,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * walkSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
 
         animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
     }
