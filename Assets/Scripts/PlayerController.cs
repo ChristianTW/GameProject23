@@ -10,18 +10,33 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 10f;
     public float jumpImpulse = 10f;
+    //edit speeds in Unity, not VScode
+    public float airSpeed = 7f;
     Vector2 moveInput;
     TouchingDirections touchingDirections;
 
     public float CurrentMoveSpeed { get
         {
+            if(CanMove)
+            {
             if(isMoving && !touchingDirections.IsOnWall)
             {
-                return walkSpeed;
+                if(touchingDirections.IsGrounded)
+                {
+                    return walkSpeed;
+                } else {
+                    //Air move speed
+                    return airSpeed;
+                }
             } else {
+                //Idle speed is 0
                 return 0;
             }
-        }
+    }  else {
+        //Movement locked
+        return 0;
+    } 
+    } 
     }
 
     private bool _isMoving = false;
@@ -47,6 +62,11 @@ public class PlayerController : MonoBehaviour
         }
         _isFacingRight = value;
     } }
+
+    public bool CanMove { get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
+        } }
 
     Rigidbody2D rb;
     Animator animator;
@@ -93,10 +113,18 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         // TODO check if alive as well
-        if(context.started && touchingDirections.IsGrounded)
+        if(context.started && touchingDirections.IsGrounded && CanMove)
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attack);
         }
     }
 }
