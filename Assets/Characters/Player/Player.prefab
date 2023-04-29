@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 440459818041421744}
   - component: {fileID: 5685357692301839175}
   - component: {fileID: 2238181115535001864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -424819064, guid: 30ff04739f7abec4ebf95bf11fed2f52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -300,14 +300,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -328,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6684368504869365904}
   - component: {fileID: 6684368504869365906}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: _Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
