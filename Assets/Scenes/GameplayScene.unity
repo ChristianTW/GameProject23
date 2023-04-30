@@ -4514,7 +4514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1227340572416147212, guid: 0e10ce7f3f3f9dd4bad100dc09b9a7c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.85
+      value: -0.76
       objectReference: {fileID: 0}
     - target: {fileID: 1227340572416147212, guid: 0e10ce7f3f3f9dd4bad100dc09b9a7c0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4551,6 +4551,14 @@ PrefabInstance:
     - target: {fileID: 1227340572416147218, guid: 0e10ce7f3f3f9dd4bad100dc09b9a7c0, type: 3}
       propertyPath: m_Name
       value: KnightEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305614571568411702, guid: 0e10ce7f3f3f9dd4bad100dc09b9a7c0, type: 3}
+      propertyPath: m_Name
+      value: DetectionZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 5189136611241320172, guid: 0e10ce7f3f3f9dd4bad100dc09b9a7c0, type: 3}
+      propertyPath: walkStopRate
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e10ce7f3f3f9dd4bad100dc09b9a7c0, type: 3}
