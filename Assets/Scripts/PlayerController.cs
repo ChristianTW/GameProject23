@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 10f;
     public float jumpImpulse = 10f;
+
+    public float dashImpulse = 10f;
+
     //edit speeds in Unity, not VScode
     public float airSpeed = 7f;
     Vector2 moveInput;
@@ -135,6 +138,18 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+        }
+    }
+
+
+    //This is for the dash
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        // TODO check if alive as well
+        if(context.started && CanMove)
+        {
+            animator.SetTrigger(AnimationStrings.dash);
+            rb.velocity = new Vector2(dashImpulse, 0f);
         }
     }
 
