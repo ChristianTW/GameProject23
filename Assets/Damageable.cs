@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
+    public UnityEvent<int, Vector2> damageableHit;
+
     Animator animator;
 
     [SerializeField]
-    private int _maxHealth = 100;
-    private float timeSinceHit = 0;
-    public float invincibilityTime = 0.25f;
+    private int _maxHealth = 30;
 
     public int MaxHealth
     {
         get
         {
-            return _maxHealth = 100;
+            return _maxHealth = 30;
         }
         set
         {
@@ -23,7 +24,8 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private int _health = 100;
+    [SerializeField]
+    private int _health = 30;
 
     public int Health
     {
@@ -49,6 +51,9 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     private bool isInvincible = false;
 
+    private float timeSinceHit = 0;
+    public float invincibilityTime = 0.25f;
+
     public bool IsAlive { 
         get
         {
@@ -61,12 +66,25 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private void awake()
+    // the velocity should not change while this is true but needs to be respected by other physics components
+    // like the player controller
+    public bool LockVelocity
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.lockVelocity);
+        }
+        set{
+            animator.SetBool(AnimationStrings.lockVelocity, value);
+        }
+    }
+
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    public void Update()
+    private void Update()
     {
         if(isInvincible)
         {
@@ -81,12 +99,22 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    public void Hit(int damage)
+    public bool Hit(int damage, Vector2 knockback)
     {
         if(IsAlive && !isInvincible)
         {
             Health -= damage;
             isInvincible = true;
+
+            // Notify other subscribed components that the damageable was hit to handle the knockback and such
+            animator.SetTrigger(AnimationStrings.hitTrigger);
+            LockVelocity = true;
+            damageableHit?.Invoke(damage, knockback);
+
+            return true;
         }
+
+        //Unable to be hit
+        return false;
     }
 }
